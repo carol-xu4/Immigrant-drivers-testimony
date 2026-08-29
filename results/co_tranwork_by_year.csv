@@ -1,0 +1,427 @@
+year,immig_status,tranwork_grp,pop,pct
+2004,Illegal immigrants,Bicycle,246.987041460181,0.1998810231301804
+2004,Illegal immigrants,Private motorized vehicle,107151.86986097434,86.71558334195612
+2004,Illegal immigrants,Public transport,6579.900520305355,5.32496458242517
+2004,Illegal immigrants,Walked only,6508.264232186485,5.266990955639748
+2004,Illegal immigrants,Worked at home,3080.007166674622,2.4925800968487803
+2004,Legal immigrants,Bicycle,1949,1.3647981513252336
+2004,Legal immigrants,Other,1860,1.3024754035222856
+2004,Legal immigrants,Private motorized vehicle,122663,85.89545183992156
+2004,Legal immigrants,Public transport,3338,2.3374531704071986
+2004,Legal immigrants,Walked only,5391,3.7750779034347537
+2004,Legal immigrants,Worked at home,7604,5.324743531388957
+2004,Native-born citizens,Bicycle,15810,0.8113629820386508
+2004,Native-born citizens,Other,9647,0.4950802459030275
+2004,Native-born citizens,Private motorized vehicle,1708662,87.68786183530204
+2004,Native-born citizens,Public transport,45136,2.316361768329952
+2004,Native-born citizens,Taxicab or ride-hailing services,736,0.03777123053639766
+2004,Native-born citizens,Walked only,44513,2.2843896533514525
+2004,Native-born citizens,Worked at home,124069,6.36717228453848
+2005,Illegal immigrants,Bicycle,535.24809890625,0.4017960004664125
+2005,Illegal immigrants,Other,747.584638263264,0.5611911901753825
+2005,Illegal immigrants,Private motorized vehicle,117019.16178217031,87.84306058832615
+2005,Illegal immigrants,Public transport,7174.852280529112,5.385963922421797
+2005,Illegal immigrants,Taxicab or ride-hailing services,101.619128609608,0.07628267999392557
+2005,Illegal immigrants,Walked only,5590.895891041621,4.1969315026714105
+2005,Illegal immigrants,Worked at home,2044.5323668141218,1.5347741159449266
+2005,Legal immigrants,Bicycle,793,0.5498010177905349
+2005,Legal immigrants,Other,921,0.6385456965763967
+2005,Legal immigrants,Private motorized vehicle,127104,88.12346603436083
+2005,Legal immigrants,Public transport,4488,3.1116102999292816
+2005,Legal immigrants,Taxicab or ride-hailing services,90,0.062398602271309125
+2005,Legal immigrants,Walked only,4071,2.822496776072216
+2005,Legal immigrants,Worked at home,6767,4.691681572999432
+2005,Native-born citizens,Bicycle,19583,0.9779031734538464
+2005,Native-born citizens,Other,12662,0.6322938253726498
+2005,Native-born citizens,Private motorized vehicle,1737160,86.74739706873737
+2005,Native-born citizens,Public transport,47462,2.3700781503582933
+2005,Native-born citizens,Taxicab or ride-hailing services,735,0.03670320341564505
+2005,Native-born citizens,Walked only,55928,2.792839130109111
+2005,Native-born citizens,Worked at home,129020,6.442785448553094
+2006,Illegal immigrants,Bicycle,1815.399465464638,1.4289917753649064
+2006,Illegal immigrants,Other,3073.0345150733538,2.418939264327906
+2006,Illegal immigrants,Private motorized vehicle,107027.87142871312,84.24699407262375
+2006,Illegal immigrants,Public transport,8657.886123956188,6.815055473211131
+2006,Illegal immigrants,Walked only,4350.623150922203,3.424593219646446
+2006,Illegal immigrants,Worked at home,2115.767127550895,1.6654261948258542
+2006,Legal immigrants,Bicycle,928,0.5631717248954673
+2006,Legal immigrants,Other,896,0.5437520102438995
+2006,Legal immigrants,Private motorized vehicle,145697,88.41856767467124
+2006,Legal immigrants,Public transport,7687,4.664979578956312
+2006,Legal immigrants,Taxicab or ride-hailing services,127,0.07707199252340985
+2006,Legal immigrants,Walked only,3505,2.1270656204295397
+2006,Legal immigrants,Worked at home,5941,3.6053913982801418
+2006,Native-born citizens,Bicycle,24005,1.145557641520869
+2006,Native-born citizens,Other,17047,0.8135105650908667
+2006,Native-born citizens,Private motorized vehicle,1812759,86.50780773529387
+2006,Native-born citizens,Public transport,56375,2.6903066878041657
+2006,Native-born citizens,Taxicab or ride-hailing services,1233,0.058840765340355414
+2006,Native-born citizens,Walked only,55461,2.6466891212826047
+2006,Native-born citizens,Worked at home,128606,6.137287483667273
+2007,Illegal immigrants,Bicycle,1475.44347083804,1.06297170705741
+2007,Illegal immigrants,Other,1724.857914303312,1.2426603918326173
+2007,Illegal immigrants,Private motorized vehicle,116788.19435705832,84.1391410606622
+2007,Illegal immigrants,Public transport,11261.452226697378,8.11322516514901
+2007,Illegal immigrants,Taxicab or ride-hailing services,454.572152413284,0.3274929513612999
+2007,Illegal immigrants,Walked only,5263.767163524302,3.792239877672928
+2007,Illegal immigrants,Worked at home,1835.3573504926662,1.322268846264534
+2007,Legal immigrants,Bicycle,1102,0.7062563287488623
+2007,Legal immigrants,Other,1500,0.9613289411282157
+2007,Legal immigrants,Private motorized vehicle,137145,87.89430508735275
+2007,Legal immigrants,Public transport,6852,4.391350603073689
+2007,Legal immigrants,Taxicab or ride-hailing services,51,0.03268518399835933
+2007,Legal immigrants,Walked only,2053,1.3157388774241512
+2007,Legal immigrants,Worked at home,7331,4.698334978273966
+2007,Native-born citizens,Bicycle,24028,1.1206958874080293
+2007,Native-born citizens,Other,17703,0.8256899989505718
+2007,Native-born citizens,Private motorized vehicle,1845085,86.05706556593323
+2007,Native-born citizens,Public transport,62557,2.9177365002740174
+2007,Native-born citizens,Taxicab or ride-hailing services,699,0.032602231783677896
+2007,Native-born citizens,Walked only,57554,2.684390340597708
+2007,Native-born citizens,Worked at home,136399,6.361819475052763
+2008,Illegal immigrants,Bicycle,331.2687006514117,0.24674286748542806
+2008,Illegal immigrants,Other,1570.090193497732,1.1694692429214564
+2008,Illegal immigrants,Private motorized vehicle,114570.67964688253,85.33706314613065
+2008,Illegal immigrants,Public transport,12564.476268159908,9.358550616952693
+2008,Illegal immigrants,Walked only,2689.255399425503,2.003070580921455
+2008,Illegal immigrants,Worked at home,2530.87681319621,1.8851035455883292
+2008,Legal immigrants,Bicycle,1432,0.8143720747720953
+2008,Legal immigrants,Other,1631,0.9275424957774354
+2008,Legal immigrants,Private motorized vehicle,149564,85.05638616704864
+2008,Legal immigrants,Public transport,8057,4.581980311758919
+2008,Legal immigrants,Taxicab or ride-hailing services,214,0.12170085474946116
+2008,Legal immigrants,Walked only,5016,2.8525770440340987
+2008,Legal immigrants,Worked at home,9927,5.6454410518593505
+2008,Native-born citizens,Bicycle,31082,1.3901697883839734
+2008,Native-born citizens,Other,15069,0.6739742790411845
+2008,Native-born citizens,Private motorized vehicle,1917662,85.76911964262233
+2008,Native-born citizens,Public transport,68179,3.0493657423020055
+2008,Native-born citizens,Taxicab or ride-hailing services,1008,0.0450836865932387
+2008,Native-born citizens,Walked only,55693,2.4909184101559947
+2008,Native-born citizens,Worked at home,147149,6.581368450901272
+2009,Illegal immigrants,Bicycle,1035.3375431032266,0.8463331954696858
+2009,Illegal immigrants,Other,1506.1575667746395,1.2312034416800184
+2009,Illegal immigrants,Private motorized vehicle,106547.15242222042,87.09661170734033
+2009,Illegal immigrants,Public transport,7545.374347568898,6.167940905004238
+2009,Illegal immigrants,Taxicab or ride-hailing services,74.6187905001782,0.06099687954598044
+2009,Illegal immigrants,Walked only,3270.383582721384,2.67336406992461
+2009,Illegal immigrants,Worked at home,2353.119711835458,1.9235498010351273
+2009,Legal immigrants,Bicycle,2019,1.2094455360138017
+2009,Legal immigrants,Other,1704,1.0207504672449321
+2009,Legal immigrants,Private motorized vehicle,141341,84.66777687257392
+2009,Legal immigrants,Public transport,9536,5.712368811999808
+2009,Legal immigrants,Taxicab or ride-hailing services,110,0.06589351607801792
+2009,Legal immigrants,Walked only,4150,2.4859826520343122
+2009,Legal immigrants,Worked at home,8076,4.837782144055207
+2009,Native-born citizens,Bicycle,30094,1.3860640093147334
+2009,Native-born citizens,Other,17164,0.7905364077848769
+2009,Native-born citizens,Private motorized vehicle,1842078,84.84209537284725
+2009,Native-born citizens,Public transport,66009,3.0402305838657617
+2009,Native-born citizens,Taxicab or ride-hailing services,159,0.007323193243870625
+2009,Native-born citizens,Walked only,56709,2.611892865828046
+2009,Native-born citizens,Worked at home,158971,7.321857567115455
+2010,Illegal immigrants,Bicycle,755.7285675212253,0.6882936215329144
+2010,Illegal immigrants,Other,744.1822644860407,0.6777776147641474
+2010,Illegal immigrants,Private motorized vehicle,93520.58292950156,85.17558218494631
+2010,Illegal immigrants,Public transport,6849.773359502057,6.2385564274158964
+2010,Illegal immigrants,Walked only,4301.235294337842,3.9174287502659944
+2010,Illegal immigrants,Worked at home,3625.9072770620573,3.3023614010747293
+2010,Legal immigrants,Bicycle,844,0.4990627790228067
+2010,Legal immigrants,Other,1202,0.710750545480348
+2010,Legal immigrants,Private motorized vehicle,147815,87.40398658916608
+2010,Legal immigrants,Public transport,6572,3.8860670423434662
+2010,Legal immigrants,Walked only,3328,1.9678683988008303
+2010,Legal immigrants,Worked at home,9356,5.532264645186469
+2010,Native-born citizens,Bicycle,24463,1.1496213669887656
+2010,Native-born citizens,Other,13636,0.6408141667113112
+2010,Native-born citizens,Private motorized vehicle,1840337,86.4853344912727
+2010,Native-born citizens,Public transport,57402,2.697566353590693
+2010,Native-born citizens,Taxicab or ride-hailing services,75,0.0035245719054963587
+2010,Native-born citizens,Walked only,52331,2.459258298487066
+2010,Native-born citizens,Worked at home,139674,6.563880751043978
+2011,Illegal immigrants,Bicycle,955.9548835659323,0.863505605366707
+2011,Illegal immigrants,Other,2585.8245348883734,2.3357524698673364
+2011,Illegal immigrants,Private motorized vehicle,94473.42521818202,85.33701081141672
+2011,Illegal immigrants,Public transport,7251.476604708778,6.550194787429732
+2011,Illegal immigrants,Walked only,3354.7510017311884,3.030316957844863
+2011,Illegal immigrants,Worked at home,2084.84199818526,1.8832193680746365
+2011,Legal immigrants,Bicycle,1614,0.9100597120963514
+2011,Legal immigrants,Other,1078,0.607834181933003
+2011,Legal immigrants,Private motorized vehicle,154935,87.36065767884027
+2011,Legal immigrants,Public transport,7686,4.333778777678163
+2011,Legal immigrants,Taxicab or ride-hailing services,188,0.10600447699759236
+2011,Legal immigrants,Walked only,3938,2.220455480938929
+2011,Legal immigrants,Worked at home,7912,4.461209691515695
+2011,Native-born citizens,Bicycle,31284,1.4424253993020255
+2011,Native-born citizens,Other,17094,0.78816071396460885
+2011,Native-born citizens,Private motorized vehicle,1870392,86.23900164465267
+2011,Native-born citizens,Public transport,65138,3.003346939641201
+2011,Native-born citizens,Taxicab or ride-hailing services,1297,0.05980135989306761
+2011,Native-born citizens,Walked only,45707,2.1074331199941723
+2011,Native-born citizens,Worked at home,137935,6.35983082255226
+2012,Illegal immigrants,Bicycle,572.5276708820547,0.5507891931129599
+2012,Illegal immigrants,Other,901.8725825706063,0.867629107392258
+2012,Illegal immigrants,Private motorized vehicle,86133.81651294643,82.86337536108164
+2012,Illegal immigrants,Public transport,9359.348927836758,9.00398095359103
+2012,Illegal immigrants,Taxicab or ride-hailing services,114.83420904756,0.11047403393730541
+2012,Illegal immigrants,Walked only,4369.354256836143,4.203452912310387
+2012,Illegal immigrants,Worked at home,2495.0331118370545,2.400298438574426
+2012,Legal immigrants,Bicycle,1235,0.5878153260352214
+2012,Legal immigrants,Other,1082,0.5149928605425987
+2012,Legal immigrants,Private motorized vehicle,179821,85.58829128986197
+2012,Legal immigrants,Public transport,10951,5.212279866730128
+2012,Legal immigrants,Taxicab or ride-hailing services,88,0.0418848167539267
+2012,Legal immigrants,Walked only,5517,2.6258924321751547
+2012,Legal immigrants,Worked at home,11406,5.428843407901
+2012,Native-born citizens,Bicycle,37093,1.6690161790134928
+2012,Native-born citizens,Other,17744,0.7983992419166801
+2012,Native-born citizens,Private motorized vehicle,1894516,85.24459750896197
+2012,Native-born citizens,Public transport,61238,2.755431288125206
+2012,Native-born citizens,Taxicab or ride-hailing services,185,0.008324158011417145
+2012,Native-born citizens,Walked only,64414,2.898336833229319
+2012,Native-born citizens,Worked at home,147257,6.625894790741917
+2013,Illegal immigrants,Bicycle,370.9614477464235,0.35808708911794007
+2013,Illegal immigrants,Other,2026.141123764654,1.955823122749369
+2013,Illegal immigrants,Private motorized vehicle,87122.1946425079,84.09858562560838
+2013,Illegal immigrants,Public transport,7111.207746395423,6.864410567430007
+2013,Illegal immigrants,Walked only,3368.888233438124,3.2519696814968233
+2013,Illegal immigrants,Worked at home,3595.921750396456,3.471123913597486
+2013,Legal immigrants,Bicycle,1313,0.6632016527005389
+2013,Legal immigrants,Other,2360,1.192045621000207
+2013,Legal immigrants,Private motorized vehicle,170294,86.01619363669884
+2013,Legal immigrants,Public transport,8623,4.355512453341011
+2013,Legal immigrants,Taxicab or ride-hailing services,272,0.1373883088610408
+2013,Legal immigrants,Walked only,3917,1.9784926684143267
+2013,Legal immigrants,Worked at home,11200,5.657165658984034
+2013,Native-born citizens,Bicycle,31328,1.3856294025180877
+2013,Native-born citizens,Other,18076,0.7994968424386159
+2013,Native-born citizens,Private motorized vehicle,1923900,85.09360340604408
+2013,Native-born citizens,Public transport,69362,3.0678634645511877
+2013,Native-born citizens,Taxicab or ride-hailing services,755,0.0333934562979174
+2013,Native-born citizens,Walked only,58659,2.5944725205026975
+2013,Native-born citizens,Worked at home,158842,7.025540907647411
+2014,Illegal immigrants,Bicycle,1061.7529369277433,0.8829928620751406
+2014,Illegal immigrants,Other,244.5949775155625,0.20341419527466703
+2014,Illegal immigrants,Private motorized vehicle,105831.04945120004,88.01300001272368
+2014,Illegal immigrants,Public transport,8036.184516990621,6.683187133302354
+2014,Illegal immigrants,Walked only,2535.944655040624,2.10898501067284
+2014,Illegal immigrants,Worked at home,2535.2662041936433,2.1084207859513278
+2014,Legal immigrants,Bicycle,2017,0.9779488770800202
+2014,Legal immigrants,Other,1677,0.8130987936852722
+2014,Legal immigrants,Private motorized vehicle,177607,86.1133198867383
+2014,Legal immigrants,Public transport,10935,5.301869593886971
+2014,Legal immigrants,Taxicab or ride-hailing services,116,0.05624296962879641
+2014,Legal immigrants,Walked only,3260,1.580621387843761
+2014,Legal immigrants,Worked at home,10636,5.156898491136884
+2014,Native-born citizens,Bicycle,35495,1.5231696002897432
+2014,Native-born citizens,Other,15644,0.6713189245508592
+2014,Native-born citizens,Private motorized vehicle,2006743,86.11381696560755
+2014,Native-born citizens,Public transport,66270,2.843793475452917
+2014,Native-born citizens,Taxicab or ride-hailing services,832,0.035702975276547866
+2014,Native-born citizens,Walked only,53485,2.2951606161852918
+2014,Native-born citizens,Worked at home,151869,6.5170374426370765
+2015,Illegal immigrants,Bicycle,470.630425182522,0.41405999079938166
+2015,Illegal immigrants,Other,576.7114995987971,0.5073899719194008
+2015,Illegal immigrants,Private motorized vehicle,99748.57893272364,87.75866043746971
+2015,Illegal immigrants,Public transport,6153.007433844074,5.413407347087554
+2015,Illegal immigrants,Taxicab or ride-hailing services,384.552370194945,0.3383286382367798
+2015,Illegal immigrants,Walked only,3374.436218067935,2.968824271963364
+2015,Illegal immigrants,Worked at home,2954.459500662318,2.599329342523808
+2015,Legal immigrants,Bicycle,1111,0.5303862128228386
+2015,Legal immigrants,Other,1240,0.5919702105313409
+2015,Legal immigrants,Private motorized vehicle,185796,88.69814293216213
+2015,Legal immigrants,Public transport,4813,2.297703728457536
+2015,Legal immigrants,Taxicab or ride-hailing services,123,0.058719625722060444
+2015,Legal immigrants,Walked only,5556,2.6524084594452666
+2015,Legal immigrants,Worked at home,10831,5.170668830858834
+2015,Native-born citizens,Bicycle,31673,1.3216732208550044
+2015,Native-born citizens,Other,17318,0.7226576844241773
+2015,Native-born citizens,Private motorized vehicle,2044859,85.32931458101044
+2015,Native-born citizens,Public transport,66418,2.771537018367306
+2015,Native-born citizens,Taxicab or ride-hailing services,678,0.028292060863817543
+2015,Native-born citizens,Walked only,60778,2.5361871315355495
+2015,Native-born citizens,Worked at home,174708,7.290338302943709
+2016,Illegal immigrants,Bicycle,1275.7989408933906,0.999570753806768
+2016,Illegal immigrants,Other,1033.9751871296803,0.8101052008186871
+2016,Illegal immigrants,Private motorized vehicle,109238.7736156961,85.5870621835644
+2016,Illegal immigrants,Public transport,6872.028927840451,5.384139236526765
+2016,Illegal immigrants,Walked only,4188.602263703053,3.2817117085820318
+2016,Illegal immigrants,Worked at home,5025.501854929952,3.9374109167013396
+2016,Legal immigrants,Bicycle,961,0.46844914572619367
+2016,Legal immigrants,Other,1675,0.8164956494187038
+2016,Legal immigrants,Private motorized vehicle,173896,84.76735967242682
+2016,Legal immigrants,Public transport,10725,5.22800945672573
+2016,Legal immigrants,Walked only,3981,1.9405786151258864
+2016,Legal immigrants,Worked at home,13907,6.7791074605766655
+2016,Native-born citizens,Bicycle,26186,1.0680782626536032
+2016,Native-born citizens,Other,22100,0.9014179181488058
+2016,Native-born citizens,Private motorized vehicle,2066052,84.27042048086771
+2016,Native-born citizens,Public transport,63863,2.6048530546034923
+2016,Native-born citizens,Taxicab or ride-hailing services,1387,0.056573151695583426
+2016,Native-born citizens,Walked only,68665,2.800717708130667
+2016,Native-born citizens,Worked at home,203440,8.297939423900138
+2017,Illegal immigrants,Bicycle,151.4944285870728,0.13711983296600677
+2017,Illegal immigrants,Other,1444.9808857827065,1.3078734283862925
+2017,Illegal immigrants,Private motorized vehicle,93754.67694372332,84.85873548093143
+2017,Illegal immigrants,Public transport,8034.194672635553,7.271867631059361
+2017,Illegal immigrants,Taxicab or ride-hailing services,97.794872569266,0.08851557589738275
+2017,Illegal immigrants,Walked only,1719.8554999362534,1.556666479925259
+2017,Illegal immigrants,Worked at home,5280.238644573334,4.779221570834266
+2017,Legal immigrants,Bicycle,1816,0.7689506533539968
+2017,Legal immigrants,Other,1535,0.6499665489528552
+2017,Legal immigrants,Private motorized vehicle,203599,86.21012338778655
+2017,Legal immigrants,Public transport,9688,4.1021993004920265
+2017,Legal immigrants,Taxicab or ride-hailing services,236,0.09992971045789825
+2017,Legal immigrants,Walked only,4387,1.8575916939779649
+2017,Legal immigrants,Worked at home,14905,6.3112387049787015
+2017,Native-born citizens,Bicycle,27475,1.0871470531093592
+2017,Native-born citizens,Other,23182,0.9172790895425357
+2017,Native-born citizens,Private motorized vehicle,2119652,83.87164423721055
+2017,Native-born citizens,Public transport,74728,2.9568817100912175
+2017,Native-born citizens,Taxicab or ride-hailing services,1749,0.06920546663833554
+2017,Native-born citizens,Walked only,62717,2.4816233568647745
+2017,Native-born citizens,Worked at home,217754,8.616219086543236
+2018,Illegal immigrants,Bicycle,495.79924969960484,0.4898713091068123
+2018,Illegal immigrants,Other,1556.476790497263,1.5378670367436655
+2018,Illegal immigrants,Private motorized vehicle,87272.6447037608,86.22918396134696
+2018,Illegal immigrants,Public transport,4310.821910258419,4.2592802909324465
+2018,Illegal immigrants,Taxicab or ride-hailing services,146.537147372946,0.1447851005419143
+2018,Illegal immigrants,Walked only,3204.210051134845,3.1658994509444165
+2018,Illegal immigrants,Worked at home,4223.611756125379,4.17311285038379
+2018,Legal immigrants,Bicycle,2393,0.9466505265323237
+2018,Legal immigrants,Other,2238,0.8853338396904892
+2018,Legal immigrants,Private motorized vehicle,219666,86.89800859224799
+2018,Legal immigrants,Public transport,7590,3.002539697609836
+2018,Legal immigrants,Taxicab or ride-hailing services,417,0.16496166718093563
+2018,Legal immigrants,Walked only,5922,2.342693028886093
+2018,Legal immigrants,Worked at home,14560,5.759812647852334
+2018,Native-born citizens,Bicycle,30991,1.2011861863782363
+2018,Native-born citizens,Other,19735,0.7649126968531023
+2018,Native-born citizens,Private motorized vehicle,2166433,83.96919729321291
+2018,Native-born citizens,Public transport,67328,2.609579024764412
+2018,Native-born citizens,Taxicab or ride-hailing services,3102,0.12023102030090313
+2018,Native-born citizens,Walked only,63036,2.443224563406747
+2018,Native-born citizens,Worked at home,229408,8.891669215083683
+2019,Illegal immigrants,Bicycle,968.312275468567,0.9285030407737247
+2019,Illegal immigrants,Other,670.788965768364,0.6432115033675477
+2019,Illegal immigrants,Private motorized vehicle,89290.20595772851,85.61930881537641
+2019,Illegal immigrants,Public transport,6647.44427262488,6.374154678065362
+2019,Illegal immigrants,Walked only,2427.1915605382937,2.3274049101665915
+2019,Illegal immigrants,Worked at home,4283.521084485274,4.1074170522503595
+2019,Legal immigrants,Bicycle,1809,0.728900564908011
+2019,Legal immigrants,Other,2790,1.1241750006043951
+2019,Legal immigrants,Private motorized vehicle,211005,85.0202673844195
+2019,Legal immigrants,Public transport,9802,3.949520916101893
+2019,Legal immigrants,Taxicab or ride-hailing services,384,0.15472516137350817
+2019,Legal immigrants,Walked only,5543,2.2334415872222806
+2019,Legal immigrants,Worked at home,16849,6.788969385370414
+2019,Native-born citizens,Bicycle,30935,1.1674774410977724
+2019,Native-born citizens,Other,18579,0.7011657791548572
+2019,Native-born citizens,Private motorized vehicle,2205077,83.21893174021504
+2019,Native-born citizens,Public transport,74359,2.806285923471448
+2019,Native-born citizens,Taxicab or ride-hailing services,3147,0.11876681775124258
+2019,Native-born citizens,Walked only,62551,2.3606556139682153
+2019,Native-born citizens,Worked at home,255082,9.626716684341423
+2020,Illegal immigrants,Bicycle,458.6494152323394,0.5100836762929877
+2020,Illegal immigrants,Other,1417.5966441220164,1.5765699981718302
+2020,Illegal immigrants,Private motorized vehicle,75802.14407038986,84.30281394500042
+2020,Illegal immigrants,Public transport,3574.706501391974,3.975584342508705
+2020,Illegal immigrants,Walked only,1960.9381747972238,2.1808434066729014
+2020,Illegal immigrants,Worked at home,6702.470377207396,7.454104631353152
+2020,Legal immigrants,Bicycle,597,0.2549734776332311
+2020,Legal immigrants,Other,2203,0.940882028854285
+2020,Legal immigrants,Private motorized vehicle,180600,77.1326801684448
+2020,Legal immigrants,Public transport,5542,2.366939720340648
+2020,Legal immigrants,Taxicab or ride-hailing services,108,0.046125855250232765
+2020,Legal immigrants,Walked only,3599,1.5371014170887753
+2020,Legal immigrants,Worked at home,41493,17.72129733238804
+2020,Native-born citizens,Bicycle,24338,0.9473459677268679
+2020,Native-born citizens,Other,23323,0.907837538223919
+2020,Native-born citizens,Private motorized vehicle,1854416,72.18232887205964
+2020,Native-born citizens,Public transport,43955,1.710929082563665
+2020,Native-born citizens,Taxicab or ride-hailing services,3624,0.14106260937801665
+2020,Native-born citizens,Walked only,58385,2.2726104990440126
+2020,Native-born citizens,Worked at home,561031,21.83788543100388
+2021,Illegal immigrants,Bicycle,312.7695871857422,0.33848008281094305
+2021,Illegal immigrants,Other,1082.4444958204276,1.171424325108582
+2021,Illegal immigrants,Private motorized vehicle,79034.15635526492,85.53097514604697
+2021,Illegal immigrants,Public transport,2814.994061903331,3.0463940939996457
+2021,Illegal immigrants,Taxicab or ride-hailing services,108.73213244998811,0.11767020421338498
+2021,Illegal immigrants,Walked only,1131.1407659265726,1.2241235587086938
+2021,Illegal immigrants,Worked at home,7919.89598156245,8.570932589111772
+2021,Legal immigrants,Bicycle,1280,0.48687899155188874
+2021,Legal immigrants,Other,2717,1.0334767344113138
+2021,Legal immigrants,Private motorized vehicle,194926,74.14482367753395
+2021,Legal immigrants,Public transport,5465,2.0787450693992753
+2021,Legal immigrants,Taxicab or ride-hailing services,677,0.25751334162549117
+2021,Legal immigrants,Walked only,3232,1.229369453668519
+2021,Legal immigrants,Worked at home,54602,20.769192731809554
+2021,Native-born citizens,Bicycle,21003,0.8041620545626423
+2021,Native-born citizens,Other,27687,1.0600787889670942
+2021,Native-born citizens,Private motorized vehicle,1841622,70.51195216148943
+2021,Native-born citizens,Public transport,27238,1.0428874942711637
+2021,Native-born citizens,Taxicab or ride-hailing services,1629,0.06237108921975644
+2021,Native-born citizens,Walked only,52643,2.0155931551845536
+2021,Native-born citizens,Worked at home,639965,24.502955256305356
+2022,Illegal immigrants,Bicycle,338.2367616554023,0.3970338522547185
+2022,Illegal immigrants,Other,616.700969210291,0.7239046409279316
+2022,Illegal immigrants,Private motorized vehicle,72873.17372205865,85.5410179168328
+2022,Illegal immigrants,Public transport,3478.5361654646604,4.083224446752659
+2022,Illegal immigrants,Taxicab or ride-hailing services,94.0845619350073,0.11043966918300518
+2022,Illegal immigrants,Walked only,1363.0564689115147,1.600002193859725
+2022,Illegal immigrants,Worked at home,6427.123847164225,7.544377280189177
+2022,Legal immigrants,Bicycle,1925,0.7128837536570011
+2022,Legal immigrants,Other,3146,1.165055734548013
+2022,Legal immigrants,Private motorized vehicle,206084,76.31892752657112
+2022,Legal immigrants,Public transport,6474,2.3975113876235974
+2022,Legal immigrants,Taxicab or ride-hailing services,657,0.24330629930007777
+2022,Legal immigrants,Walked only,4573,1.6935155353108915
+2022,Legal immigrants,Worked at home,47171,17.4687997629893
+2022,Native-born citizens,Bicycle,27343,0.9982938860660546
+2022,Native-born citizens,Other,22104,0.8070178128809594
+2022,Native-born citizens,Private motorized vehicle,1989439,72.63448745204863
+2022,Native-born citizens,Public transport,37545,1.370769262785723
+2022,Native-born citizens,Taxicab or ride-hailing services,1065,0.038883187238428416
+2022,Native-born citizens,Walked only,61850,2.258145662626101
+2022,Native-born citizens,Worked at home,599627,21.8924027363541
+2023,Illegal immigrants,Other,330.419634568467,0.3288824088945798
+2023,Illegal immigrants,Private motorized vehicle,87788.72787775085,87.38030455100811
+2023,Illegal immigrants,Public transport,3006.9227153178144,2.9929334776521475
+2023,Illegal immigrants,Taxicab or ride-hailing services,301.34725,0.2999452790485452
+2023,Illegal immigrants,Walked only,1826.5626224736327,1.8180648255376357
+2023,Illegal immigrants,Worked at home,7213.428807241264,7.179869457858983
+2023,Legal immigrants,Bicycle,1320,0.4935003757332406
+2023,Legal immigrants,Other,1975,0.7383812439948108
+2023,Legal immigrants,Private motorized vehicle,203467,76.06897041614793
+2023,Legal immigrants,Public transport,8826,3.299722966834531
+2023,Legal immigrants,Taxicab or ride-hailing services,878,0.328252522646807
+2023,Legal immigrants,Walked only,4191,1.566863692953039
+2023,Legal immigrants,Worked at home,46820,17.50430878168964
+2023,Native-born citizens,Bicycle,22552,0.817965647764087
+2023,Native-born citizens,Other,27704,1.0048297404068935
+2023,Native-born citizens,Private motorized vehicle,2035361,73.8229593294945
+2023,Native-born citizens,Public transport,40387,1.4648447417633994
+2023,Native-born citizens,Taxicab or ride-hailing services,3478,0.12614777061562144
+2023,Native-born citizens,Walked only,55117,1.9991048513574485
+2023,Native-born citizens,Worked at home,572485,20.764147918598056
+2024,Illegal immigrants,Bicycle,578.2938275729605,0.5768648339773141
+2024,Illegal immigrants,Other,730.2158148091107,0.7284114142206051
+2024,Illegal immigrants,Private motorized vehicle,84242.81750391555,84.03464919750714
+2024,Illegal immigrants,Public transport,3674.2393208792105,3.6651600877833914
+2024,Illegal immigrants,Taxicab or ride-hailing services,910.6281164264511,0.9083779078225478
+2024,Illegal immigrants,Walked only,2718.1896382935756,2.7114728528124377
+2024,Illegal immigrants,Worked at home,7393.333009502717,7.375063705876565
+2024,Legal immigrants,Bicycle,1438,0.4720821514865007
+2024,Legal immigrants,Other,2357,0.7737813845992226
+2024,Legal immigrants,Private motorized vehicle,230487,75.66675858808698
+2024,Legal immigrants,Public transport,9100,2.9874461603109572
+2024,Legal immigrants,Taxicab or ride-hailing services,1451,0.4763499317155163
+2024,Legal immigrants,Walked only,5306,1.741910915012081
+2024,Legal immigrants,Worked at home,54469,17.88167086878874
+2024,Native-born citizens,Bicycle,25528,0.9307860927548323
+2024,Native-born citizens,Other,22940,0.8364240429252527
+2024,Native-born citizens,Private motorized vehicle,2018560,73.5994819567218
+2024,Native-born citizens,Public transport,38902,1.418420580552667
+2024,Native-born citizens,Taxicab or ride-hailing services,4347,0.15849761615501629
+2024,Native-born citizens,Walked only,66008,2.406742729965566
+2024,Native-born citizens,Worked at home,566343,20.649646980924867

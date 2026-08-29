@@ -1,0 +1,29 @@
+immig_status,tranwork_grp,pop,pct
+Illegal immigrants,Bicycle,578.2938275729605,0.5768648339773141
+Illegal immigrants,Other,730.2158148091107,0.7284114142206051
+Illegal immigrants,Private motorized vehicle,84242.81750391555,84.03464919750714
+Illegal immigrants,Public transport,3674.2393208792105,3.6651600877833914
+Illegal immigrants,Taxicab or ride-hailing services,910.6281164264511,0.9083779078225478
+Illegal immigrants,Walked only,2718.1896382935756,2.7114728528124377
+Illegal immigrants,Worked at home,7393.333009502717,7.375063705876565
+Legal immigrants,Bicycle,1438,0.4720821514865007
+Legal immigrants,Other,2357,0.7737813845992226
+Legal immigrants,Private motorized vehicle,230487,75.66675858808698
+Legal immigrants,Public transport,9100,2.9874461603109572
+Legal immigrants,Taxicab or ride-hailing services,1451,0.4763499317155163
+Legal immigrants,Walked only,5306,1.741910915012081
+Legal immigrants,Worked at home,54469,17.88167086878874
+Native-born citizens,Bicycle,25528,0.9307860927548323
+Native-born citizens,Other,22940,0.8364240429252527
+Native-born citizens,Private motorized vehicle,2018560,73.5994819567218
+Native-born citizens,Public transport,38902,1.418420580552667
+Native-born citizens,Taxicab or ride-hailing services,4347,0.15849761615501629
+Native-born citizens,Walked only,66008,2.406742729965566
+Native-born citizens,Worked at home,566343,20.649646980924867
+All immigrants,Bicycle,2016.2938275729605,0.49802775204988065
+All immigrants,Other,3087.2158148091107,0.7625471701180349
+All immigrants,Private motorized vehicle,314729.8175039155,77.73876077536738
+All immigrants,Public transport,12774.239320879211,3.155257237871229
+All immigrants,Taxicab or ride-hailing services,2361.628116426451,0.5833258654654586
+All immigrants,Walked only,8024.189638293576,1.9819874826436663
+All immigrants,Worked at home,61862.33300950272,15.280093716484346

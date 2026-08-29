@@ -5,8 +5,8 @@ pacman::p_load(tidyverse, ggthemes, readxl, data.table, gdata, ipumsr)
 # Set working directory 
 setwd("C:/Users/CarolXu/OneDrive - Cato Institute/Desktop/Drivers")
 
-# ACS data -----------------------------------------------------------------
-acs = fread("data/output/acs_drivers.csv") %>%
+# acs_co data -----------------------------------------------------------------
+acs_co = fread("data/output/acs_drivers.csv") %>%
   filter(statefip == 8)   # Colorado
 
 # ANALYSIS -----------------------------------------------------------------
@@ -25,7 +25,7 @@ linetypes_4 = c(
   "All immigrants"       = "dotted")
 
 # total population (driving age 16+)
-population_year = acs %>%
+population_year = acs_co %>%
     group_by(year, immig_status) %>%
     summarise(
         n = n(),
@@ -37,13 +37,13 @@ write_csv(population_year, "results/co_driving_pop_by_year.csv")
 
 # number of vehicles per household (household head's immigration status)
 # [VEHICLES] reports the number of cars, vans, and trucks of one-ton capacity or less kept at home for use by household members
-acs = acs %>%
+acs_co = acs_co %>%
   mutate(vehicles_n = case_when(
     vehicles == 0 ~ NA_real_,   # N/A - vacant unit or GQ
     vehicles == 9 ~ 0,          # "No vehicles available" -> 0
     TRUE ~ as.numeric(vehicles)))
 
-vehicles_by_year = acs %>%
+vehicles_by_year = acs_co %>%
   filter(relate == 1) %>%
   group_by(year, immig_status) %>%
   summarise(
@@ -52,7 +52,7 @@ vehicles_by_year = acs %>%
     avg_cars = weighted.mean(vehicles_n, w = hhwt, na.rm = TRUE),
     .groups = "drop")
 
-vehicles_by_year_allimm = acs %>%
+vehicles_by_year_allimm = acs_co %>%
   filter(relate == 1, immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
   group_by(year) %>%
   summarise(
@@ -75,15 +75,15 @@ ggplot(vehicles_by_year, aes(x = as.numeric(year), y = avg_cars, color = immig_s
   scale_color_manual(values = colors_4) +
   scale_linetype_manual(values = linetypes_4) +
   scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
-  scale_y_continuous(expand = c(0.02, 0)) +
+  scale_y_continuous(expand = c(0.02, 0), limits = c(1.5, 2.2)) +
   labs(
     title = "Average Household Vehicles by Immigration Status, Colorado (2004-2024)",
-    subtitle = "ACS; households only, non-GQ, driving age 16+; household head's status",
+    subtitle = "acs_co; households only, non-GQ, driving age 16+; household head's status",
     x = NULL,
     y = NULL,
     color = NULL,
     linetype = NULL,
-    caption = "Source: ACS via IPUMS") +
+    caption = "Source: acs_co via IPUMS") +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
@@ -109,7 +109,7 @@ ggplot(vehicles_by_year, aes(x = as.numeric(year), y = avg_cars, color = immig_s
 ggsave("results/co_vehicles_by_year.png", width = 15, height = 10)
 
 # share of households with zero vehicles, by immigration status
-zero_veh_by_year = acs %>%
+zero_veh_by_year = acs_co %>%
   filter(relate == 1) %>%
   mutate(no_vehicle = vehicles_n == 0) %>%
   group_by(year, immig_status) %>%
@@ -117,7 +117,7 @@ zero_veh_by_year = acs %>%
     pct = sum(hhwt[no_vehicle], na.rm = TRUE) / sum(hhwt, na.rm = TRUE) * 100,
     .groups = "drop")
 
-zero_veh_by_year_allimm = acs %>%
+zero_veh_by_year_allimm = acs_co %>%
   filter(relate == 1, immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
   mutate(no_vehicle = vehicles_n == 0) %>%
   group_by(year) %>%
@@ -140,15 +140,15 @@ ggplot(zero_veh_by_year, aes(x = as.numeric(year), y = pct, color = immig_status
   scale_color_manual(values = colors_4) +
   scale_linetype_manual(values = linetypes_4) +
   scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
-  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0), limits = c(4.5, 12)) +
   labs(
     title = "Share of Households With No Vehicle, by Immigration Status, Colorado (2004-2024)",
-    subtitle = "ACS; households only, non-GQ, driving age 16+; reference person's status",
+    subtitle = "acs_co; households only, non-GQ, driving age 16+; reference person's status",
     x = NULL,
     y = NULL,
     color = NULL,
     linetype = NULL,
-    caption = "Source: ACS via IPUMS") +
+    caption = "Source: acs_co via IPUMS") +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
@@ -174,7 +174,7 @@ ggplot(zero_veh_by_year, aes(x = as.numeric(year), y = pct, color = immig_status
 ggsave("results/co_zero_vehicle_households_by_year.png", width = 15, height = 10)
 
 # method of transportation to work (16+ people who worked last week)
-acs = acs %>%
+acs_co = acs_co %>%
   mutate(tranwork_grp = case_when(
     tranwork %in% c(10, 11, 12, 13, 14, 15, 20) ~ "Private motorized vehicle",
     tranwork %in% c(31, 32, 33, 34, 35, 36, 37, 39) ~ "Public transport",
@@ -185,7 +185,7 @@ acs = acs %>%
     tranwork == 80 ~ "Worked at home",
     TRUE ~ NA_character_))     # 0 = N/A, not a worker last week
 
-tranwork_by_year = acs %>%
+tranwork_by_year = acs_co %>%
   filter(!is.na(tranwork_grp)) %>%
   group_by(year, immig_status, tranwork_grp) %>%
   summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
@@ -202,7 +202,7 @@ drive_by_year = tranwork_by_year %>%
   filter(tranwork_grp == "Private motorized vehicle") %>%
   select(year, immig_status, pct)
 
-drive_by_year_allimm = acs %>%
+drive_by_year_allimm = acs_co %>%
   filter(!is.na(tranwork_grp), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
   group_by(year) %>%
   summarise(
@@ -224,15 +224,15 @@ ggplot(drive_by_year, aes(x = as.numeric(year), y = pct, color = immig_status, l
   scale_color_manual(values = colors_4) +
   scale_linetype_manual(values = linetypes_4) +
   scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
-  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0), limits = c(70, 90)) +
   labs(
     title = "Share Commuting by Private Motorized Vehicle, by Immigration Status, Colorado (2004-2024)",
-    subtitle = "ACS; workers age 16+, non-GQ",
+    subtitle = "acs_co; workers age 16+, non-GQ",
     x = NULL,
     y = NULL,
     color = NULL,
     linetype = NULL,
-    caption = "Source: ACS via IPUMS") +
+    caption = "Source: acs_co via IPUMS") +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
@@ -258,7 +258,7 @@ ggplot(drive_by_year, aes(x = as.numeric(year), y = pct, color = immig_status, l
 ggsave("results/co_drive_to_work_by_year.png", width = 15, height = 10)
 
 # 2024 commute breakdown
-tranwork_2024 = acs %>%
+tranwork_2024 = acs_co %>%
   filter(year == 2024, !is.na(tranwork_grp)) %>%
   group_by(immig_status, tranwork_grp) %>%
   summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
@@ -266,7 +266,7 @@ tranwork_2024 = acs %>%
   mutate(pct = pop / sum(pop) * 100) %>%
   ungroup()
 
-tranwork_2024_allimm = acs %>%
+tranwork_2024_allimm = acs_co %>%
   filter(year == 2024, !is.na(tranwork_grp), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
   group_by(tranwork_grp) %>%
   summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
@@ -289,11 +289,11 @@ ggplot(tranwork_2024, aes(x = immig_status, y = pct, fill = tranwork_grp)) +
   scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0, 0)) +
   labs(
     title = "Means of Transportation to Work, by Immigration Status, Colorado (2024)",
-    subtitle = "ACS; workers age 16+, non-GQ",
+    subtitle = "acs_co; workers age 16+, non-GQ",
     x = NULL,
     y = NULL,
     fill = NULL,
-    caption = "Source: ACS via IPUMS") +
+    caption = "Source: acs_co via IPUMS") +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
@@ -319,12 +319,12 @@ ggplot(tranwork_2024, aes(x = immig_status, y = pct, fill = tranwork_grp)) +
 ggsave("results/co_tranwork_2024.png", width = 15, height = 10)
 
 # all driving occupations
-acs = acs %>%
+acs_co = acs_co %>%
   mutate(
     driving_occ = occ2010 %in% c(9110, 9120, 9130, 9140, 9150),
     truck_driver = occ2010 == 9130)
 
-driving_occ_by_year = acs %>%
+driving_occ_by_year = acs_co %>%
   filter(!occ2010 %in% c(9920, 9999)) %>%
   group_by(year, immig_status) %>%
   summarise(
@@ -333,7 +333,7 @@ driving_occ_by_year = acs %>%
     pct = pop / total * 100,
     .groups = "drop")
 
-driving_occ_by_year_allimm = acs %>%
+driving_occ_by_year_allimm = acs_co %>%
   filter(!occ2010 %in% c(9920, 9999), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
   group_by(year) %>%
   summarise(
@@ -357,15 +357,15 @@ ggplot(driving_occ_by_year, aes(x = as.numeric(year), y = pct, color = immig_sta
   scale_color_manual(values = colors_4) +
   scale_linetype_manual(values = linetypes_4) +
   scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
-  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0), limits = c(1,5.25)) +
   labs(
     title = "Share Working in Driving Occupations, by Immigration Status, Colorado (2004-2024)",
-    subtitle = "ACS; workers age 16+, non-GQ; ambulance/bus/truck/taxi drivers and other motor vehicle operators",
+    subtitle = "acs_co; workers age 16+, non-GQ; ambulance/bus/truck/taxi drivers and other motor vehicle operators",
     x = NULL,
     y = NULL,
     color = NULL,
     linetype = NULL,
-    caption = "Source: ACS via IPUMS") +
+    caption = "Source: acs_co via IPUMS") +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
@@ -391,7 +391,7 @@ ggplot(driving_occ_by_year, aes(x = as.numeric(year), y = pct, color = immig_sta
 ggsave("results/co_driving_occ_share_by_year.png", width = 15, height = 10)
 
 # truck drivers: OCC2010 == 9130
-truck_driver_by_year = acs %>%
+truck_driver_by_year = acs_co %>%
   filter(!occ2010 %in% c(9920, 9999)) %>%
   group_by(year, immig_status) %>%
   summarise(
@@ -400,7 +400,7 @@ truck_driver_by_year = acs %>%
     pct = pop / total * 100,
     .groups = "drop")
 
-truck_driver_by_year_allimm = acs %>%
+truck_driver_by_year_allimm = acs_co %>%
   filter(!occ2010 %in% c(9920, 9999), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
   group_by(year) %>%
   summarise(
@@ -424,10 +424,73 @@ ggplot(truck_driver_by_year, aes(x = as.numeric(year), y = pct, color = immig_st
   scale_color_manual(values = colors_4) +
   scale_linetype_manual(values = linetypes_4) +
   scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
-  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0), limits = c(1.15, 3.5)) +
   labs(
     title = "Share Working as Truck Drivers, by Immigration Status, Colorado (2004-2024)",
-    subtitle = "ACS; workers age 16+, non-GQ; Driver/Sales Workers and Truck Drivers (OCC2010 9130)",
+    subtitle = "acs_co; workers age 16+, non-GQ; Driver/Sales Workers and Truck Drivers (OCC2010 9130)",
+    x = NULL,
+    y = NULL,
+    color = NULL,
+    linetype = NULL,
+    caption = "Source: acs_co via IPUMS") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 20, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y = element_text(size = 25, color = "gray40"),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/co_truck_driver_share_by_year.png", width = 15, height = 10)
+
+# total number of drivers
+drivers_by_year_co = acs %>%
+  filter(statefip == 8, !is.na(tranwork_grp)) %>%
+  group_by(year, immig_status) %>%
+  summarise(
+    drivers = sum(perwt[tranwork_grp == "Private motorized vehicle"], na.rm = TRUE),
+    .groups = "drop")
+
+drivers_by_year_co_allimm = acs %>%
+  filter(statefip == 8, !is.na(tranwork_grp), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
+  group_by(year) %>%
+  summarise(
+    immig_status = "All immigrants",
+    drivers = sum(perwt[tranwork_grp == "Private motorized vehicle"], na.rm = TRUE),
+    .groups = "drop")
+
+drivers_by_year_co = bind_rows(drivers_by_year_co, drivers_by_year_co_allimm) %>%
+  mutate(immig_status = factor(immig_status, levels = c(
+    "Native-born citizens", "Legal immigrants", "Illegal immigrants", "All immigrants")))
+
+print(drivers_by_year_co, n = Inf)
+
+write_csv(drivers_by_year_co, "results/co_drivers_by_year.csv")
+
+ggplot(drivers_by_year_co %>% filter(immig_status != "Native-born citizens"), aes(x = as.numeric(year), y = drivers, color = immig_status, linetype = immig_status)) +
+  geom_line(linewidth = 1.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = colors_4) +
+  scale_linetype_manual(values = linetypes_4) +
+  scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x / 1e3, "K"), expand = c(0.02, 0)) +
+  labs(
+    title = "Number of Foreign-Born Drivers, Colorado (2004-2024)",
+    subtitle = "ACS; workers age 16+, non-GQ; commute by private motorized vehicle",
     x = NULL,
     y = NULL,
     color = NULL,
@@ -455,4 +518,4 @@ ggplot(truck_driver_by_year, aes(x = as.numeric(year), y = pct, color = immig_st
     plot.background = element_rect(fill = "white", color = NA),
     panel.background = element_rect(fill = "white", color = NA))
 
-ggsave("results/co_truck_driver_share_by_year.png", width = 15, height = 10)
+ggsave("results/co_drivers_by_year.png", width = 15, height = 10)

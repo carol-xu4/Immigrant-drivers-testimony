@@ -189,8 +189,8 @@ acs = acs %>%
     TRUE ~ NA_character_))     # 0 = N/A, not a worker last week
 
 tranwork_by_year = acs %>%
-  filter(!is.na(tranwork_grp)) %>%
-  group_by(year, immig_status, tranwork_grp) %>%
+  filter(!is.na()) %>%
+  group_by(year, immig_status, ) %>%
   summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
   group_by(year, immig_status) %>%
   mutate(pct = pop / sum(pop) * 100) %>%
@@ -202,15 +202,15 @@ write_csv(tranwork_by_year, "results/tranwork_by_year.csv")
 
 # pct commuting by private motorized vehicle
 drive_by_year = tranwork_by_year %>%
-  filter(tranwork_grp == "Private motorized vehicle") %>%
+  filter( == "Private motorized vehicle") %>%
   select(year, immig_status, pct)
 
 drive_by_year_allimm = acs %>%
-  filter(!is.na(tranwork_grp), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
+  filter(!is.na(), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
   group_by(year) %>%
   summarise(
     immig_status = "All immigrants",
-    pct = sum(perwt[tranwork_grp == "Private motorized vehicle"], na.rm = TRUE) / sum(perwt, na.rm = TRUE) * 100,
+    pct = sum(perwt[ == "Private motorized vehicle"], na.rm = TRUE) / sum(perwt, na.rm = TRUE) * 100,
     .groups = "drop")
 
 drive_by_year = bind_rows(drive_by_year, drive_by_year_allimm) %>%
@@ -262,16 +262,16 @@ ggsave("results/drive_to_work_by_year.png", width = 15, height = 10)
 
 # 2024 commute breakdown
 tranwork_2024 = acs %>%
-  filter(year == 2024, !is.na(tranwork_grp)) %>%
-  group_by(immig_status, tranwork_grp) %>%
+  filter(year == 2024, !is.na()) %>%
+  group_by(immig_status, ) %>%
   summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
   group_by(immig_status) %>%
   mutate(pct = pop / sum(pop) * 100) %>%
   ungroup()
 
 tranwork_2024_allimm = acs %>%
-  filter(year == 2024, !is.na(tranwork_grp), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
-  group_by(tranwork_grp) %>%
+  filter(year == 2024, !is.na(), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
+  group_by() %>%
   summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
   mutate(immig_status = "All immigrants",
          pct = pop / sum(pop) * 100)
@@ -279,7 +279,7 @@ tranwork_2024_allimm = acs %>%
 tranwork_2024 = bind_rows(tranwork_2024, tranwork_2024_allimm) %>%
   mutate(immig_status = factor(immig_status, levels = c(
     "Native-born citizens", "Legal immigrants", "Illegal immigrants", "All immigrants")),
-    tranwork_grp = factor(tranwork_grp, levels = c(
+     = factor(, levels = c(
       "Private motorized vehicle", "Public transport", "Taxicab or ride-hailing services",
       "Bicycle", "Walked only", "Other", "Worked at home")))
 
@@ -287,7 +287,7 @@ print(tranwork_2024, n = Inf)
 
 write_csv(tranwork_2024, "results/tranwork_2024.csv")
 
-ggplot(tranwork_2024, aes(x = immig_status, y = pct, fill = tranwork_grp)) +
+ggplot(tranwork_2024, aes(x = immig_status, y = pct, fill = )) +
   geom_col(width = 0.6, position = position_stack(reverse = TRUE)) +
   scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0, 0)) +
   labs(
@@ -321,7 +321,7 @@ ggplot(tranwork_2024, aes(x = immig_status, y = pct, fill = tranwork_grp)) +
 
 ggsave("results/tranwork_2024.png", width = 15, height = 10)
 
-# all driving occupations: ambulance drivers (except EMTs), bus drivers, driver/sales workers and truck drivers, taxi drivers and chauffeurs, motor vehicle oporators (all other)
+# all driving occupations: ambulance drivers (except EMTs), bus drivers, driver/sales workers and truck drivers, taxi drivers and chauffeurs, motor vehicle operators (all other)
 # occ2010 universe: age 16+ who had worked within the previous five years
 # denominators do not include unemployed
 acs = acs %>%
@@ -463,3 +463,502 @@ ggplot(truck_driver_by_year, aes(x = as.numeric(year), y = pct, color = immig_st
     panel.background = element_rect(fill = "white", color = NA))
 
 ggsave("results/truck_driver_share_by_year.png", width = 15, height = 10)
+
+# total number of foreign drivers over time (work commute by private vehicle)
+drivers_by_year = acs %>%
+  filter(!is.na(tranwork_grp)) %>%
+  group_by(year, immig_status) %>%
+  summarise(
+    drivers = sum(perwt[tranwork_grp == "Private motorized vehicle"], na.rm = TRUE),
+    .groups = "drop")
+
+drivers_by_year_allimm = acs %>%
+  filter(!is.na(tranwork_grp), immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
+  group_by(year) %>%
+  summarise(
+    immig_status = "All immigrants",
+    drivers = sum(perwt[tranwork_grp == "Private motorized vehicle"], na.rm = TRUE),
+    .groups = "drop")
+
+drivers_by_year = bind_rows(drivers_by_year, drivers_by_year_allimm) %>%
+  mutate(immig_status = factor(immig_status, levels = c(
+    "Native-born citizens", "Legal immigrants", "Illegal immigrants", "All immigrants")))
+
+print(drivers_by_year, n = Inf)
+
+write_csv(drivers_by_year, "results/drivers_by_year.csv")
+
+ggplot(drivers_by_year %>% filter(immig_status != "Native-born citizens"), aes(x = as.numeric(year), y = drivers, color = immig_status, linetype = immig_status)) +
+  geom_line(linewidth = 1.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = colors_4) +
+  scale_linetype_manual(values = linetypes_4) +
+  scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x / 1e6, "M"), expand = c(0.02, 0), limits = c(0, 25000000)) +
+  labs(
+    title = "Number of Foreign-Born Drivers, by Immigration Status (2004-2024)",
+    subtitle = "ACS; workers age 16+, non-GQ; commute by private motorized vehicle",
+    x = NULL,
+    y = NULL,
+    color = NULL,
+    linetype = NULL,
+    caption = "Source: ACS via IPUMS") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 20, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y = element_text(size = 25, color = "gray40"),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/drivers_by_year.png", width = 15, height = 10)
+
+# pct of drivers who are immigrants
+# (1) composition of drivers (commute by private motorized vehicle), incl. All immigrants
+drivers_composition_by_year = acs %>%
+  filter(!is.na(tranwork_grp), tranwork_grp == "Private motorized vehicle") %>%
+  group_by(year, immig_status) %>%
+  summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
+  group_by(year) %>%
+  mutate(pct = pop / sum(pop) * 100) %>%
+  ungroup()
+
+drivers_composition_by_year_allimm = acs %>%
+  filter(!is.na(tranwork_grp), tranwork_grp == "Private motorized vehicle") %>%
+  group_by(year) %>%
+  summarise(
+    total = sum(perwt, na.rm = TRUE),
+    pop = sum(perwt[immig_status %in% c("Legal immigrants", "Illegal immigrants")], na.rm = TRUE),
+    .groups = "drop") %>%
+  mutate(immig_status = "All immigrants", pct = pop / total * 100) %>%
+  select(year, immig_status, pop, pct)
+
+drivers_composition_by_year = bind_rows(drivers_composition_by_year, drivers_composition_by_year_allimm) %>%
+  mutate(immig_status = factor(immig_status, levels = c(
+    "Native-born citizens", "Legal immigrants", "Illegal immigrants", "All immigrants")))
+
+print(drivers_composition_by_year, n = Inf)
+
+write_csv(drivers_composition_by_year, "results/drivers_composition_by_year.csv")
+
+# (2) composition of driving-occupation workers, incl. All immigrants
+driving_occ_composition_by_year = acs %>%
+  filter(!occ2010 %in% c(9920, 9999), driving_occ) %>%
+  group_by(year, immig_status) %>%
+  summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
+  group_by(year) %>%
+  mutate(pct = pop / sum(pop) * 100) %>%
+  ungroup()
+
+driving_occ_composition_by_year_allimm = acs %>%
+  filter(!occ2010 %in% c(9920, 9999), driving_occ) %>%
+  group_by(year) %>%
+  summarise(
+    total = sum(perwt, na.rm = TRUE),
+    pop = sum(perwt[immig_status %in% c("Legal immigrants", "Illegal immigrants")], na.rm = TRUE),
+    .groups = "drop") %>%
+  mutate(immig_status = "All immigrants", pct = pop / total * 100) %>%
+  select(year, immig_status, pop, pct)
+
+driving_occ_composition_by_year = bind_rows(driving_occ_composition_by_year, driving_occ_composition_by_year_allimm) %>%
+  mutate(immig_status = factor(immig_status, levels = c(
+    "Native-born citizens", "Legal immigrants", "Illegal immigrants", "All immigrants")))
+
+print(driving_occ_composition_by_year, n = Inf)
+
+write_csv(driving_occ_composition_by_year, "results/driving_occ_composition_by_year.csv")
+
+# (3) composition of truck drivers, incl. All immigrants
+truck_driver_composition_by_year = acs %>%
+  filter(!occ2010 %in% c(9920, 9999), truck_driver) %>%
+  group_by(year, immig_status) %>%
+  summarise(pop = sum(perwt, na.rm = TRUE), .groups = "drop") %>%
+  group_by(year) %>%
+  mutate(pct = pop / sum(pop) * 100) %>%
+  ungroup()
+
+truck_driver_composition_by_year_allimm = acs %>%
+  filter(!occ2010 %in% c(9920, 9999), truck_driver) %>%
+  group_by(year) %>%
+  summarise(
+    total = sum(perwt, na.rm = TRUE),
+    pop = sum(perwt[immig_status %in% c("Legal immigrants", "Illegal immigrants")], na.rm = TRUE),
+    .groups = "drop") %>%
+  mutate(immig_status = "All immigrants", pct = pop / total * 100) %>%
+  select(year, immig_status, pop, pct)
+
+truck_driver_composition_by_year = bind_rows(truck_driver_composition_by_year, truck_driver_composition_by_year_allimm) %>%
+  mutate(immig_status = factor(immig_status, levels = c(
+    "Native-born citizens", "Legal immigrants", "Illegal immigrants", "All immigrants")))
+
+print(truck_driver_composition_by_year, n = Inf)
+
+write_csv(truck_driver_composition_by_year, "results/truck_driver_composition_by_year.csv")
+
+ggplot(drivers_composition_by_year, aes(x = as.numeric(year), y = pct, color = immig_status, linetype = immig_status)) +
+  geom_line(linewidth = 1.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = colors_4) +
+  scale_linetype_manual(values = linetypes_4) +
+  scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0), limits = c(0, 100)) +
+  labs(
+    title = "Composition of Drivers, by Immigration Status (2004-2024)",
+    subtitle = "ACS; workers age 16+, non-GQ; commute by private motorized vehicle",
+    x = NULL, y = NULL, color = NULL, linetype = NULL,
+    caption = "Source: ACS via IPUMS") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 20, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y = element_text(size = 25, color = "gray40"),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/fig.drivers_composition_by_year.png", width = 15, height = 10)
+
+ggplot(driving_occ_composition_by_year, aes(x = as.numeric(year), y = pct, color = immig_status, linetype = immig_status)) +
+  geom_line(linewidth = 1.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = colors_4) +
+  scale_linetype_manual(values = linetypes_4) +
+  scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0), limits = c(0, 100)) +
+  labs(
+    title = "Composition of Driving-Occupation Workers, by Immigration Status (2004-2024)",
+    subtitle = "ACS; workers age 16+, non-GQ; ambulance/bus/truck/taxi drivers and other motor vehicle operators",
+    x = NULL, y = NULL, color = NULL, linetype = NULL,
+    caption = "Source: ACS via IPUMS") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 20, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y = element_text(size = 25, color = "gray40"),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/fig.driving_occ_composition_by_year.png", width = 15, height = 10)
+
+ggplot(truck_driver_composition_by_year, aes(x = as.numeric(year), y = pct, color = immig_status, linetype = immig_status)) +
+  geom_line(linewidth = 1.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = colors_4) +
+  scale_linetype_manual(values = linetypes_4) +
+  scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0), limits = c(0, 100)) +
+  labs(
+    title = "Composition of Truck Drivers, by Immigration Status (2004-2024)",
+    subtitle = "ACS; workers age 16+, non-GQ; Driver/Sales Workers and Truck Drivers (OCC2010 9130)",
+    x = NULL, y = NULL, color = NULL, linetype = NULL,
+    caption = "Source: ACS via IPUMS") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 20, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y = element_text(size = 25, color = "gray40"),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/fig.truck_driver_composition_by_year.png", width = 15, height = 10)
+
+# increase in foreign-born drivers vs. increase in fatal crashes
+fatal_crashes = read_csv("data/output/fatalcrashes.csv")
+
+drivers_vs_crashes = drivers_by_year %>%
+  filter(immig_status == "All immigrants", year >= 2010) %>%
+  select(year, drivers) %>%
+  left_join(fatal_crashes, by = "year") %>%
+  mutate(
+    drivers_index = drivers / drivers[year == 2010] * 100,
+    crashes_index = total_crashes / total_crashes[year == 2010] * 100)
+
+print(drivers_vs_crashes)
+
+drivers_vs_crashes_long = drivers_vs_crashes %>%
+  select(year, drivers_index, crashes_index) %>%
+  pivot_longer(cols = c(drivers_index, crashes_index),
+               names_to = "series", values_to = "index") %>%
+  mutate(series = recode(series,
+    drivers_index = "Foreign-born drivers",
+    crashes_index = "Fatal crashes"))
+
+trend_colors = c(
+  "Foreign-born drivers" = "#3043B4",
+  "Fatal crashes"        = "#C97703")
+
+ggplot(drivers_vs_crashes_long, aes(x = year, y = index, color = series)) +
+  geom_line(linewidth = 1.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = trend_colors) +
+  scale_x_continuous(breaks = seq(2010, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(expand = c(0.02, 0)) +
+  labs(
+    title = "Growth in Foreign-Born Drivers vs. Fatal Crashes (2010 = 100)",
+    subtitle = "ACS via IPUMS (drivers, all immigrants); NHTSA (fatal motor vehicle crashes)",
+    x = NULL,
+    y = NULL,
+    color = NULL,
+    caption = "Source: ACS via IPUMS; NHTSA") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 20, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y = element_text(size = 25, color = "gray40"),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/drivers_vs_crashes.png", width = 15, height = 10)
+
+# growth year over year
+drivers_vs_crashes_yoy = drivers_vs_crashes %>%
+  arrange(year) %>%
+  mutate(
+    drivers_yoy = (drivers / lag(drivers) - 1) * 100,
+    crashes_yoy = (total_crashes / lag(total_crashes) - 1) * 100) %>%
+  filter(!is.na(drivers_yoy))   # drop 2010, no prior year to compare to
+
+print(drivers_vs_crashes_yoy)
+
+write_csv(drivers_vs_crashes_yoy, "results/drivers_vs_crashes_yoy.csv")
+
+drivers_vs_crashes_yoy_long = drivers_vs_crashes_yoy %>%
+  select(year, drivers_yoy, crashes_yoy) %>%
+  pivot_longer(cols = c(drivers_yoy, crashes_yoy),
+               names_to = "series", values_to = "yoy") %>%
+  mutate(series = recode(series,
+    drivers_yoy = "Foreign-born drivers",
+    crashes_yoy = "Fatal crashes"))
+
+trend_colors = c(
+  "Foreign-born drivers" = "#3043B4",
+  "Fatal crashes"        = "#C97703")
+
+ggplot(drivers_vs_crashes_yoy_long, aes(x = year, y = yoy, color = series)) +
+  geom_hline(yintercept = 0, color = "gray70", linewidth = 0.5) +
+  geom_line(linewidth = 1.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = trend_colors) +
+  scale_x_continuous(breaks = seq(2011, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"), expand = c(0.02, 0)) +
+  labs(
+    title = "Year-Over-Year Change: Foreign-Born Drivers vs. Fatal Crashes",
+    subtitle = "ACS via IPUMS (drivers, all immigrants); NHTSA (fatal motor vehicle crashes)",
+    x = NULL,
+    y = NULL,
+    color = NULL,
+    caption = "Source: ACS via IPUMS; NHTSA") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 20, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y = element_text(size = 25, color = "gray40"),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/drivers_vs_crashes_yoy.png", width = 15, height = 10)
+
+# raw values, dual axis: total foreign-born drivers vs. total fatal crashes ---
+
+ratio = max(drivers_vs_crashes$drivers) / max(drivers_vs_crashes$total_crashes)
+
+ggplot(drivers_vs_crashes, aes(x = year)) +
+  geom_line(aes(y = drivers, color = "Foreign-born drivers"), linewidth = 1.8) +
+  geom_point(aes(y = drivers, color = "Foreign-born drivers"), size = 2) +
+  geom_line(aes(y = total_crashes * ratio, color = "Fatal crashes"), linewidth = 1.8) +
+  geom_point(aes(y = total_crashes * ratio, color = "Fatal crashes"), size = 2) +
+  scale_color_manual(values = trend_colors) +
+  scale_x_continuous(breaks = seq(2010, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(
+    name = NULL,
+    labels = function(x) paste0(x / 1e6, "M"),
+    expand = c(0.02, 0),
+    sec.axis = sec_axis(~ . / ratio, name = NULL, labels = scales::comma)) +
+  labs(
+    title = "Foreign-Born Drivers vs. Fatal Crashes (2010-2024)",
+    subtitle = "Left axis: foreign-born drivers (ACS via IPUMS). Right axis: fatal motor vehicle crashes (NHTSA)",
+    x = NULL,
+    color = NULL,
+    caption = "Source: ACS via IPUMS; NHTSA") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 18, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y.left = element_text(size = 22, color = trend_colors["Foreign-born drivers"]),
+    axis.text.y.right = element_text(size = 22, color = trend_colors["Fatal crashes"]),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/drivers_vs_crashes_raw.png", width = 15, height = 10)
+
+# total drivers (native-born + immigrants combined) vs. fatal crashes --------
+
+total_drivers_by_year = drivers_by_year %>%
+  filter(immig_status %in% c("Native-born citizens", "Legal immigrants", "Illegal immigrants")) %>%
+  group_by(year) %>%
+  summarise(drivers = sum(drivers, na.rm = TRUE), .groups = "drop")
+
+total_drivers_vs_crashes = total_drivers_by_year %>%
+  filter(year >= 2010) %>%
+  left_join(fatal_crashes, by = "year") %>%
+  mutate(
+    drivers_index = drivers / drivers[year == 2010] * 100,
+    crashes_index = total_crashes / total_crashes[year == 2010] * 100)
+
+print(total_drivers_vs_crashes)
+
+write_csv(total_drivers_vs_crashes, "results/total_drivers_vs_crashes.csv")
+
+total_drivers_vs_crashes_long = total_drivers_vs_crashes %>%
+  select(year, drivers_index, crashes_index) %>%
+  pivot_longer(cols = c(drivers_index, crashes_index),
+               names_to = "series", values_to = "index") %>%
+  mutate(series = recode(series,
+    drivers_index = "All drivers",
+    crashes_index = "Fatal crashes"))
+
+trend_colors_all = c(
+  "All drivers"   = "#3043B4",
+  "Fatal crashes" = "#C97703")
+
+ratio_all = max(total_drivers_vs_crashes$drivers) / max(total_drivers_vs_crashes$total_crashes)
+
+ggplot(total_drivers_vs_crashes, aes(x = year)) +
+  geom_line(aes(y = drivers, color = "All drivers"), linewidth = 1.8) +
+  geom_point(aes(y = drivers, color = "All drivers"), size = 2) +
+  geom_line(aes(y = total_crashes * ratio_all, color = "Fatal crashes"), linewidth = 1.8) +
+  geom_point(aes(y = total_crashes * ratio_all, color = "Fatal crashes"), size = 2) +
+  scale_color_manual(values = trend_colors_all) +
+  scale_x_continuous(breaks = seq(2010, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(
+    name = NULL,
+    labels = function(x) paste0(x / 1e6, "M"),
+    expand = c(0.02, 0),
+    sec.axis = sec_axis(~ . / ratio_all, name = NULL, labels = scales::comma)) +
+  labs(
+    title = "All Drivers vs. Fatal Crashes (2010-2024)",
+    subtitle = "Left axis: all drivers, native-born + immigrant (ACS via IPUMS). Right axis: fatal motor vehicle crashes (NHTSA)",
+    x = NULL,
+    color = NULL,
+    caption = "Source: ACS via IPUMS; NHTSA") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 18, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y.left = element_text(size = 22, color = trend_colors_all["All drivers"]),
+    axis.text.y.right = element_text(size = 22, color = trend_colors_all["Fatal crashes"]),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/total_drivers_vs_crashes_raw.png", width = 15, height = 10)
