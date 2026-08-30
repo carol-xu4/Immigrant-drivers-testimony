@@ -888,7 +888,7 @@ ggplot(drivers_vs_crashes, aes(x = year)) +
 
 ggsave("results/drivers_vs_crashes_raw.png", width = 15, height = 10)
 
-# total drivers (native-born + immigrants combined) vs. fatal crashes --------
+# total drivers (native-born + immigrants combined) vs. fatal crashes 
 
 total_drivers_by_year = drivers_by_year %>%
   filter(immig_status %in% c("Native-born citizens", "Legal immigrants", "Illegal immigrants")) %>%
