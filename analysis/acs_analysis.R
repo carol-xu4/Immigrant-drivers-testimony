@@ -962,3 +962,63 @@ ggplot(total_drivers_vs_crashes, aes(x = year)) +
     panel.background = element_rect(fill = "white", color = NA))
 
 ggsave("results/total_drivers_vs_crashes_raw.png", width = 15, height = 10)
+
+# transportation time to work (persons age 16+ who worked outside the home)
+drive_time_by_year = acs %>%
+  filter(tranwork_grp == "Private motorized vehicle",
+         !is.na(trantime), !trantime %in% c(0, 888)) %>%
+  group_by(year, immig_status) %>%
+  summarise(avg_commute = weighted.mean(trantime, w = perwt, na.rm = TRUE),
+            .groups = "drop")
+ 
+drive_time_by_year_allimm = acs %>%
+  filter(tranwork_grp == "Private motorized vehicle",
+         !is.na(trantime), !trantime %in% c(0, 888),
+         immig_status %in% c("Legal immigrants", "Illegal immigrants")) %>%
+  group_by(year) %>%
+  summarise(avg_commute = weighted.mean(trantime, w = perwt, na.rm = TRUE),
+            .groups = "drop") %>%
+  mutate(immig_status = "All immigrants")
+
+drive_time_by_year = bind_rows(drive_time_by_year, drive_time_by_year_allimm)
+
+print(drive_time_by_year, n = Inf)
+
+ggplot(drive_time_by_year, aes(x = year, y = avg_commute,
+                                color = immig_status, linetype = immig_status)) +
+  geom_line(linewidth = 1.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = colors_4) +
+  scale_linetype_manual(values = linetypes_4) +
+  scale_x_continuous(breaks = seq(2004, 2024, by = 2), expand = c(0.02, 0)) +
+  scale_y_continuous(name = NULL, labels = scales::comma, expand = c(0.02, 0)) +
+  labs(
+    title = "Average Commute Time for Those Who Drive to Work, by Nativity",
+    subtitle = "Minutes, among workers who commute by private motorized vehicle (ACS via IPUMS)",
+    x = NULL,
+    color = NULL,
+    linetype = NULL,
+    caption = "Source: ACS via IPUMS") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold", hjust = 0, color = "black"),
+    plot.subtitle = element_text(size = 18, color = "gray40", hjust = 0, margin = margin(b = 12)),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.text = element_text(size = 20),
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(size = 25, color = "gray40"),
+    axis.text.y = element_text(size = 22, color = "gray40"),
+    plot.caption = element_text(size = 12, color = "gray40", hjust = 0),
+    plot.caption.position = "plot",
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA))
+
+ggsave("results/drive_time_by_year.png", width = 15, height = 10)
